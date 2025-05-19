@@ -30,7 +30,7 @@ class ComplaintController extends Controller
             'status' => 'pending',
         ]);
 
-        return redirect()->route('complaints.status')->with('success', 'Complaint submitted successfully!');
+        return redirect()->route('dashboard')->with('success', 'Complaint submitted successfully!');
     }
 
     public function status() {
@@ -39,6 +39,12 @@ class ComplaintController extends Controller
             ->latest()
             ->get();
 
-        return view('complaints.status', compact('complaints'));
+        return view('dashboard', compact('complaints'));
+    }
+
+    public function list(Request $request) {
+        $categories = Category::all();
+
+        return view('new', compact('categories'));
     }
 }
