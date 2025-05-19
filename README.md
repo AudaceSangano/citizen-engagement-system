@@ -37,12 +37,22 @@ Currently, complaints are often handled through fragmented channels, resulting i
 ```bash
 git clone https://github.com/AudaceSangano/citizen-engagement-system.git
 cd citizen-engagement-system
+```
+### 2. Install Dependencies
 
+```bash
 composer install
 npm install && npm run dev
+```
+### 3. Setup Environment
 
+```bash
 cp .env.example .env
 php artisan key:generate
+```
+### 4. Configure Database
+
+```bash
 
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -50,6 +60,10 @@ DB_PORT=3306
 DB_DATABASE=citizen_system
 DB_USERNAME=root
 DB_PASSWORD=yourpassword
+```
+### 5. Serve the Application
+
+```bash
 
 php artisan migrate
 php artisan serve
