@@ -67,3 +67,7 @@ DB_PASSWORD=yourpassword
 
 php artisan migrate
 php artisan serve
+```
+
+### Browser 
+http://localhost:8000
