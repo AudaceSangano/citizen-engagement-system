@@ -14,6 +14,10 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/complaints', [ComplaintController::class, 'list'])->name('complaints.new');
         Route::post('/complaints', [ComplaintController::class, 'store'])->name('complaints.new');
+        Route::delete('/complaints/{complaint}', [ComplaintController::class, 'destroy'])->name('complaints.destroy');
+        Route::get('/complaints/{complaint}/edit', [ComplaintController::class, 'edit'])->name('complaints.edit');
+        Route::put('/complaints/{complaint}', [ComplaintController::class, 'update'])->name('complaints.update');
+
     });
 });
 

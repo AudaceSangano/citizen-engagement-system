@@ -47,4 +47,42 @@ class ComplaintController extends Controller
 
         return view('new', compact('categories'));
     }
+
+    public function destroy(Complaint $complaint)
+    {
+        if ($complaint->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $complaint->delete();
+
+        return redirect()->back()->with('success', 'Complaint deleted successfully.');
+    }
+
+    public function edit(Complaint $complaint)
+    {
+        if ($complaint->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $categories = Category::all();
+        return view('edit', compact('complaint', 'categories'));
+    }
+
+    public function update(Request $request, Complaint $complaint)
+    {
+        if ($complaint->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $request->validate([
+            'subject' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'description' => 'required|string',
+        ]);
+
+        $complaint->update($request->only('subject', 'category_id', 'description'));
+
+        return redirect()->route('dashboard')->with('success', 'Complaint updated successfully.');
+    }
 }
