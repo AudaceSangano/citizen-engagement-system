@@ -15,10 +15,19 @@ Route::middleware('auth')->group(function () {
         Route::get('/complaints', [ComplaintController::class, 'list'])->name('complaints.new');
         Route::post('/complaints', [ComplaintController::class, 'store'])->name('complaints.new');
         Route::delete('/complaints/{complaint}', [ComplaintController::class, 'destroy'])->name('complaints.destroy');
+        Route::get('/complaints/{complaint}', [ComplaintController::class, 'show'])->name('complaints.show');
         Route::get('/complaints/{complaint}/edit', [ComplaintController::class, 'edit'])->name('complaints.edit');
         Route::put('/complaints/{complaint}', [ComplaintController::class, 'update'])->name('complaints.update');
 
     });
 });
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\Admin\ComplaintController::class, 'index'])->name('admin.dashboard');
+    Route::get('/complaints', [App\Http\Controllers\Admin\ComplaintController::class, 'index'])->name('complaints.index');
+    Route::get('/complaints/{complaint}', [App\Http\Controllers\Admin\ComplaintController::class, 'show'])->name('complaints.show');
+    Route::post('/complaints/{complaint}/response', [App\Http\Controllers\Admin\ComplaintController::class, 'respond'])->name('complaints.respond');
+});
+
 
 require __DIR__.'/auth.php';

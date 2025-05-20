@@ -85,4 +85,11 @@ class ComplaintController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Complaint updated successfully.');
     }
+
+    public function show($id)
+    {
+        $complaint = Complaint::with('category')->findOrFail($id);
+
+        return view('show', compact('complaint'));
+    }
 }

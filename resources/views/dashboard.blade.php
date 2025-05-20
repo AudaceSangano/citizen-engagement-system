@@ -54,6 +54,7 @@
                                             </td>
                                             <td>{{ $complaint->created_at->format('d M Y') }}</td>
                                             <td>
+                                                <a href="{{ route('complaints.show', $complaint->id) }}" class="btn btn-sm btn-info">View</a>
                                                 <a href="{{ route('complaints.edit', $complaint->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                                 <form action="{{ route('complaints.destroy', $complaint->id) }}" method="POST" class="d-inline delete-form">
                                                     @csrf
